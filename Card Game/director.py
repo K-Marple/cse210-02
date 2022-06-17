@@ -40,11 +40,13 @@ class Director:
             self.replay() 
 
     def get_input(self):
-        """Ask the user if they think the next card is higher or lower.
+        """Show the current cardn and ask the user if they think the next card is higher or lower.
         
         Args:
             self (Director): an instance of Director.
         """
+        current_card = Card.draw(self)
+        print(f"The card is: {current_card}")
         player_guess = input("Higher or lower? [h/l] ")
     
     def update_game(self):
@@ -59,7 +61,7 @@ class Director:
         for i in range(len(self.cards)):
             card = self.cards[i]
             card.draw()
-            self.score += card.value
+            self.score += card
         self.total_score += self.score
     
     def show_outputs(self):

@@ -17,7 +17,6 @@ class Card:
             self (Card): An instance of Card.
         """
         self.value = 0
-        self.points = 0
         
     def draw(self):
         """Generates a new random value.
