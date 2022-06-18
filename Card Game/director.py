@@ -45,7 +45,8 @@ class Director:
         Args:
             self (Director): an instance of Director.
         """
-        current_card = Card.draw(self)
+        card = self.card
+        current_card = card.draw()
         print(f"The card is: {current_card}")
         player_guess = input("Higher or lower? [h/l] ")
     
