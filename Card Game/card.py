@@ -9,18 +9,13 @@ class Card:
         value (int): The number of on a card.
     """
 
-    def __init__(self):
+    def __init__(self, value=None):
         """Constructs a new instance of Card.
 
         Args:
             self (Card): An instance of Card.
         """
-        self.value = 0
-        
-    def draw(self):
-        """Generates a new random value.
-        
-        Args:
-            self (Card): An instance of Card.
-        """
-        self.value = random.randint(1,13)
+        if value is None:
+            value = random.randint(1,13)
+        self.value = value
+    

@@ -18,14 +18,9 @@ class Director:
         Args:
             self (Director): an instance of Director.
         """
-        self.cards = []
-        self.is_playing = True
-        self.score = 300
+        self.continue_playing = True
         self.total_score = 300
-
-        for i in range(2):
-            card = Card()
-            self.cards.append(card)
+        self.guess = ""
     
     def start_game(self):
         """Starts the game in a loop that runs until no longer playing.
@@ -33,60 +28,46 @@ class Director:
         Args:
             self (Director): an instance of Director.
         """
-        while self.is_playing:
+        while self.continue_playing:
+            card1 = Card()
+            print(f"The card is: {card1.value}")
             self.get_input()
-            self.update_game()
-            self.show_outputs()
+            card2 = Card()
+            print(f"Next card was: {card2.value}")
+            self.score_game(card1.value, card2.value)
+            print(f"Your score is: {self.total_score}")
             self.replay() 
 
     def get_input(self):
-        """Show the current card and ask the user if they think the next card is higher or lower.
+        """Ask the user if they think the next card is higher or lower.
         
         Args:
             self (Director): an instance of Director.
         """
-        current_card = self.cards
-        print(f"The card is: {current_card}")
-        player_guess = input("Higher or lower? [h/l] ")
+        self.guess = input("Higher or lower? [h/l] ")
     
-    def update_game(self):
+    def score_game(self, card1, card2):
         """Updates the player's score.
         
         Args:
             self (Director): an instance of Director.
         """
-        if not self.is_playing:
+        if not self.continue_playing:
             return
 
-        for i in range(len(self.cards)):
-            card = self.cards[i]
-            card.draw()
-            if card1 > card2 and player_guess == "h":
-                points = 100
-            elif card1 < card2 and player_guess == "l":
-                points = -75
-            elif card1 > card2 and player_guess == "l":
-                points = -75
-            elif card1 < card2 and player_guess == "h":
-                points = 100
-            self.score += points
-        self.total_score += self.score
-    
-    def show_outputs(self):
-        """Displays the cards and the score. Also asks about the next card.
+        if card1 > card2 and self.guess == "h":
+            self.score = 75
+            self.total_score -= self.score
+        elif card1 < card2 and self.guess == "l":
+            self.score = 75
+            self.total_score -= self.score
+        elif card1 > card2 and self.guess == "l":
+            self.score = 100
+            self.total_score += self.score
+        elif card1 < card2 and self.guess == "h":
+            self.score = 100
+            self.total_score += self.score
         
-        Args:
-            self (Director): an instance of Director.
-        """
-        if not self.is_playing:
-            return
-
-        for i in range(len(self.cards)):
-            card = self.cards[i]
-            
-        print(f"Next card was: {card}")
-        print(f"Your score is: {self.total_score}")
-        self.is_playing == (self.score > 0)
 
     def replay(self):
         """Asks player if they would like to play again.
@@ -95,4 +76,4 @@ class Director:
             self (Director): an instance of Director.
         """
         play_again = input("Play again? [y/n] ")
-        self.is_playing = play_again == "y"
+        self.continue_playing = (play_again == "y")
