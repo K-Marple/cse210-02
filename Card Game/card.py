@@ -6,8 +6,7 @@ class Card:
     The responsibility of Card is to keep track of the card facing up and the next card which is unknown.
 
     Attributes:
-        value1 (int): The number of the card which is facing up.
-        value2 (int): The number of the card which is unknown.
+        value (int): The number of on a card.
     """
 
     def __init__(self):
